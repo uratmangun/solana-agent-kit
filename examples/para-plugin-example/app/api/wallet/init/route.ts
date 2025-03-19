@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { useWallet } from "@/utils/init_server";
+import { activateWallet } from "@/utils/init_server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await useWallet(userShare, walletId,session);
+    await activateWallet(userShare, walletId,session);
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

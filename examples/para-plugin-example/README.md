@@ -6,6 +6,29 @@ This repository demonstrates how to integrate and use Solana Agent Kit v2 with P
 
 Watch our implementation demo: [YouTube Video](https://www.youtube.com/watch?v=qItH-SnOcr8)
 
+## 🌐 Web demo
+
+https://smell-marco-th-travis.trycloudflare.com/
+
+## 🐳 Docker
+
+To run the application using Docker:
+
+1. Make sure you have Docker installed on your system
+
+2. Run the application using the provided docker script:
+
+```bash
+./docker-run.sh
+```
+3. Check the Cloudflare tunnel URL:
+
+```bash
+docker logs cloudflare-tunnel
+```
+
+and you will see your url that you can share and see
+
 ## 🚀 Features
 
 - Integration of [solana-plugin-para](https://github.com/uratmangun/solana-plugin-para) for backend and frontend respectively
@@ -26,19 +49,8 @@ git clone <repository-url>
 ```
 
 2. Install dependencies:
-In order to install this dependency:
 
 ```
-"@getpara/plugin-para-server": "file:../../../solana-plugin-para/packages/plugin-para-server",
-"@getpara/plugin-para-web": "file:../../../solana-plugin-para/packages/plugin-para-web",
-```
-
-```
-git clone https://github.com/uratmangun/solana-plugin-para/
-cd solana-plugin-para
-pnpm install
-pnpm build
-cd ..
 cd <this-repository-folder>/examples/para-plugin-example
 pnpm install
 ```

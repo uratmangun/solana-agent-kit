@@ -2,7 +2,7 @@ import { solanaAgentWithPara } from "./init";
 import ky from 'ky';
 
 // The first parameter is bound automatically by the plugin system
-export async function useWalletWeb(walletId: string) {
+export async function activateWalletWeb(walletId: string) {
   try {
     if(!walletId){
       throw new Error("Provide `walletId` in the request body to use a wallet.");

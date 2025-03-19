@@ -4,16 +4,20 @@ import {solanaAgent} from "./solana";
 import ParaServerPlugin from "@getpara/plugin-para-server";
 import TokenPlugin from "@solana-agent-kit/plugin-token";
 export const solanaAgentWithPara = solanaAgent.use(ParaServerPlugin).use(TokenPlugin);
-export async function useWallet(userShare: string,walletId: string,session: string) {
+export async function activateWallet(userShare: string,walletId: string,session: string) {
     try {
       if(!userShare){
         throw new Error("Provide `userShare` in the request body to use a wallet.");
       }
       const para = solanaAgentWithPara.methods.getParaInstance();
     
-      const solanaConnection = new Connection(process.env.NEXT_PUBLIC_RPC_URL as string);
+      const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || "https://api.devnet.solana.com";
+      if (!rpcUrl || !rpcUrl.startsWith('http')) {
+        throw new Error('Invalid RPC URL. Must start with http:// or https://');
+      }
+      const solanaConnection = new Connection(rpcUrl);
       await para.importSession(session);
-  await para.setUserShare(userShare);
+      await para.setUserShare(userShare);
       // Create the Para Solana Signer
       const solanaSigner = new ParaSolanaWeb3Signer(para as any, solanaConnection, walletId);
     //   console.log("solanaSigner",solanaSigner.sender?.toBase58())
